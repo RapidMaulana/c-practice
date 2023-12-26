@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include "./functions.cpp"
+#include <stdlib.h>
 
 int main()
 {
     // declaring variables here
     int choice;
     // ########################
-
+    system("clear");
     printf("What do you want to do? \n");
     printf("    Display Data\n");
     printf("    Search Data\n");
