@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int indext = 0;
+
 char *tolower(char str[100])
 {
     int size = strlen(str);
@@ -42,53 +44,283 @@ struct searched
     char furnish[100];
 };
 
-void swap(int *a, int *b)
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-// void bubbleSort(struct column data[3950], int size, char value[100], char col[100])
-// {
-//     if(strcmp(col, "rooms") == 0 || strcmp(col, "Rooms") == 0){
-//         for (int i = 0; i < size - 1; i++)
-//         {
-//             for (int j = 0; j < size - 1; j++)
-//             {
-//                 if(strcmp(value, "asc") == 0 || strcmp(value, "Asc") == 0)
-//                 {
-//                     if(data[j].rooms > data[j+1].rooms){
-//                         swap(&data[j].rooms, &data[j+1].rooms);
-//                     }
-//                 }
-//                 else{
-//                    if(data[j].rooms < data[j+1].rooms){
-//                         swap(&data[j].rooms, &data[j+1].rooms);
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
-
 void storeData()
 {
     struct menu menust[8];
     struct column data[3950];
-
-    int i = 0;
 
     FILE *file = fopen("file.csv", "r");
 
     fscanf(file, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", menust[0].menu, menust[1].menu, menust[2].menu, menust[3].menu, menust[4].menu, menust[5].menu, menust[6].menu, menust[7].menu);
     while (!feof(file))
     {
-        fscanf(file, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", data[i].location, data[i].city, data[i].price, data[i].rooms, data[i].bathroom, data[i].carpark, data[i].type, data[i].furnish);
-        i++;
+        fscanf(file, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%s\n", data[indext].location, data[indext].city, data[indext].price, data[indext].rooms, data[indext].bathroom, data[indext].carpark, data[indext].type, data[indext].furnish);
+        indext++;
     }
     fclose(file);
+    if(data != NULL){
+        printf("Data Is Set\n");
+    } else{
+        printf("Err\n");
+    }
 }
+
+void swap(struct column *a, struct column *b)
+{
+    struct column temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
+{
+    tolower(sort);
+    tolower(data);
+
+    if (strcmp(sort, "asc") == 0 || strcmp(sort, "ascending") == 0)
+    {
+        if (strcmp(data, "location") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].location, arr[j + 1].location) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "city") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].city, arr[j + 1].city) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "price") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].price, arr[j+1].price) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "rooms") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].rooms, arr[j+1].rooms) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "bathrooms") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].bathroom, arr[j+1].bathroom) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "carpark") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].carpark, arr[j+1].carpark) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "type") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].type, arr[j + 1].type) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "furnish") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].furnish, arr[j + 1].furnish) > 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+    }
+
+    else if (strcmp(sort, "dsc") == 0 || strcmp(sort, "descending") == 0)
+    {
+        if (strcmp(data, "location") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].location, arr[j + 1].location) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+
+        else if (strcmp(data, "city") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].city, arr[j + 1].city) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "price") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].price, arr[j+1].price) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "rooms") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].rooms, arr[j+1].rooms) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "bathrooms") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].bathroom, arr[j+1].bathroom) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "carpark") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].carpark, arr[j+1].carpark) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "type") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].type, arr[j + 1].type) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+        else if (strcmp(data, "furnish") == 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size - i - 1; j++)
+                {
+                    if (strcmp(arr[j].furnish, arr[j + 1].furnish) < 0)
+                    {
+                        swap(&arr[j], &arr[j + 1]);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void sortData()
+{
+    struct menu menust[8];
+    struct column data[3950];
+
+    char cos[100], val[100];
+    // struct menu menust[8];
+    // struct column data[3950];
+
+    printf("Choose column:");
+    scanf("%s", cos);
+    printf("Sort ascending or descending?");
+    scanf("%s", val);
+    puts("");
+
+    tolower(cos);
+
+
+    printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
+    for (int i = 0; i < 10; i++)
+    {
+        bubbleSort(data, cos, val, indext); 
+        printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s \n", data[i].location, data[i].city, data[i].price, data[i].rooms, data[i].bathroom, data[i].carpark, data[i].type, data[i].furnish);
+    }
+}
+
 
 void displayData()
 {
@@ -99,7 +331,7 @@ void displayData()
     printf("Number of rows:");
     scanf("%d", &rows);
     puts("");
-    printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", menust[0].menu, menust[1].menu, menust[2].menu, menust[3].menu, menust[4].menu, menust[5].menu, menust[6].menu, menust[7].menu);
+    printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
     for (int i = 0; i < rows; i++)
     {
         printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s \n", data[i].location, data[i].city, data[i].price, data[i].rooms, data[i].bathroom, data[i].carpark, data[i].type, data[i].furnish);
@@ -311,40 +543,51 @@ void searchData()
             }
         }
     }
+    if (nf == i)
+    {
+        printf("Not Found!\n");
+    }
     else
     {
-        if (nf == i)
+        printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
+        for (int k = 0; k < total; k++)
         {
-            printf("Not Found!\n");
-        }
-        else
-        {
-            printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", menust[0].menu, menust[1].menu, menust[2].menu, menust[3].menu, menust[4].menu, menust[5].menu, menust[6].menu, menust[7].menu);
-            for (int k = 0; k < total; k++)
-            {
-                printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s \n", results[k].location, results[k].city, results[k].price, results[k].rooms, results[k].bathroom, results[k].carpark, results[k].type, results[k].furnish);
-            }
+            printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s \n", results[k].location, results[k].city, results[k].price, results[k].rooms, results[k].bathroom, results[k].carpark, results[k].type, results[k].furnish);
         }
     }
 }
 
-void sortData()
-{
-    char column[100], val[100];
-    struct menu menust[8];
-    struct column data[3950];
-
-    printf("Choose column:");
-    scanf("%s", column);
-    printf("Sort ascending or descending?");
-    scanf("%s", val);
-    puts("");
-
-    tolower(column);
-    
-}
-
 void exportData()
 {
-    printf("this export\n");
+    FILE *create;
+    struct column data[3950];
+    struct menu menust[8];
+
+    char filename[100];
+    int i = 0;
+
+
+    printf("File name : ");
+    fgets(filename, sizeof(filename), stdin);
+    filename[strcspn(filename, "\n")] = '\0'; // Remove the trailing newline character
+
+    create = fopen(filename, "w");
+
+    if (create != NULL)
+    {
+        fprintf(create, "%s,%s,%s,%s,%s,%s,%s,%s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
+        while (i < indext)
+        {
+            fprintf(create, "%s,%s,%s,%s,%s,%s,%s,%s\n", data[i].location, data[i].city, data[i].price, data[i].rooms, data[i].bathroom, data[i].carpark, data[i].type, data[i].furnish);
+            i++;
+        }
+
+        printf("Data successfully written in %s!\n", filename);
+
+        fclose(create); // Close the file after writing
+    }
+    else
+    {
+        printf("Error opening the file %s for writing!\n", filename);
+    }
 }
