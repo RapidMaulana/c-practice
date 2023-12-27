@@ -58,9 +58,12 @@ void storeData()
         indext++;
     }
     fclose(file);
-    if(data != NULL){
+    if (data != NULL)
+    {
         printf("Data Is Set\n");
-    } else{
+    }
+    else
+    {
         printf("Err\n");
     }
 }
@@ -111,7 +114,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].price, arr[j+1].price) > 0)
+                    if (strcmp(arr[j].price, arr[j + 1].price) > 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -124,7 +127,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].rooms, arr[j+1].rooms) > 0)
+                    if (strcmp(arr[j].rooms, arr[j + 1].rooms) > 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -137,7 +140,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].bathroom, arr[j+1].bathroom) > 0)
+                    if (strcmp(arr[j].bathroom, arr[j + 1].bathroom) > 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -150,7 +153,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].carpark, arr[j+1].carpark) > 0)
+                    if (strcmp(arr[j].carpark, arr[j + 1].carpark) > 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -220,7 +223,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].price, arr[j+1].price) < 0)
+                    if (strcmp(arr[j].price, arr[j + 1].price) < 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -233,7 +236,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].rooms, arr[j+1].rooms) < 0)
+                    if (strcmp(arr[j].rooms, arr[j + 1].rooms) < 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -246,7 +249,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].bathroom, arr[j+1].bathroom) < 0)
+                    if (strcmp(arr[j].bathroom, arr[j + 1].bathroom) < 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -259,7 +262,7 @@ void bubbleSort(struct column arr[], char data[100], char sort[100], int size)
             {
                 for (int j = 0; j < size - i - 1; j++)
                 {
-                    if (strcmp(arr[j].carpark, arr[j+1].carpark) < 0)
+                    if (strcmp(arr[j].carpark, arr[j + 1].carpark) < 0)
                     {
                         swap(&arr[j], &arr[j + 1]);
                     }
@@ -301,26 +304,24 @@ void sortData()
     struct column data[3950];
 
     char cos[100], val[100];
-    // struct menu menust[8];
-    // struct column data[3950];
 
     printf("Choose column:");
     scanf("%s", cos);
+    getchar();
     printf("Sort ascending or descending?");
     scanf("%s", val);
+    getchar();
     puts("");
 
     tolower(cos);
 
-
     printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
     for (int i = 0; i < 10; i++)
     {
-        bubbleSort(data, cos, val, indext); 
+        bubbleSort(data, cos, val, indext);
         printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s \n", data[i].location, data[i].city, data[i].price, data[i].rooms, data[i].bathroom, data[i].carpark, data[i].type, data[i].furnish);
     }
 }
-
 
 void displayData()
 {
@@ -330,7 +331,9 @@ void displayData()
 
     printf("Number of rows:");
     scanf("%d", &rows);
+    getchar();
     puts("");
+
     printf("%-30s %-15s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Location", "City", "Price", "Rooms", "Bathrooms", "Carparks", "Type", "Furnish");
     for (int i = 0; i < rows; i++)
     {
@@ -349,8 +352,10 @@ void searchData()
 
     printf("Choose column:");
     scanf("%s", column);
+    getchar();
     printf("What data you want to find? ");
     scanf("%s", val);
+    getchar();
     puts("");
 
     tolower(column);
@@ -566,10 +571,13 @@ void exportData()
     char filename[100];
     int i = 0;
 
-
     printf("File name : ");
-    fgets(filename, sizeof(filename), stdin);
+    scanf("%s", filename);
+    getchar();
+
     filename[strcspn(filename, "\n")] = '\0'; // Remove the trailing newline character
+
+    strcat(filename, ".csv");
 
     create = fopen(filename, "w");
 

@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <string.h>
-#include "./functions.cpp"
 #include <stdlib.h>
+#include "./functions.cpp"
 
 int main()
 {
+    storeData();
+
     // declaring variables here
     int choice;
     // ########################
-
 
     system("clear");
     printf("What do you want to do? \n");
@@ -24,19 +25,15 @@ int main()
     switch (choice)
     {
     case 1:
-        storeData();
         displayData();
         break;
     case 2:
-        storeData();
         searchData();
         break;
     case 3:
-        storeData();
         sortData();
         break;
     case 4:
-        storeData();
         exportData();
         break;
     case 5:
